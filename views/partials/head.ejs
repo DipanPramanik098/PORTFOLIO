@@ -1,0 +1,19 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= typeof title !== 'undefined' ? title : 'My Portfolio' %></title>
+
+<% if (typeof description !== 'undefined' && description) { %>
+<meta name="description" content="<%= String(description).slice(0, 160) %>">
+<% } %>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233a49ff'/%3E%3Ctext x='50' y='68' font-size='56' font-weight='800' text-anchor='middle' fill='white' font-family='sans-serif'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+
+<!-- থিম আগে বসে, যাতে পেজ আঁকার সময় সাদা ঝলকানি না আসে (CSP-র জন্য এখন আলাদা ফাইল) -->
+<script src="/js/theme-init.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="/css/style.css">

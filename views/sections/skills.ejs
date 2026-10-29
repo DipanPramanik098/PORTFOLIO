@@ -1,0 +1,32 @@
+<section id="skills" class="sec sec-alt">
+  <div class="container">
+    <%- include('../partials/sec-head', { heading: 'Skills', route: '/skills' }) %>
+  </div>
+
+  <% if (skills.length === 0) { %>
+    <p class="empty-msg container">No skills added yet.</p>
+  <% } else { %>
+    <% const base = skills.length < 6 ? [...skills, ...skills, ...skills] : skills; %>
+    <% const rows = [
+      { list: base, cls: '', dur: 42 },
+      { list: [...base].reverse(), cls: 'rev', dur: 52 }
+    ]; %>
+
+    <% rows.forEach((row) => { %>
+      <div class="marquee <%= row.cls %>" style="--dur: <%= row.dur %>s">
+        <div class="marquee-track">
+          <% [0, 1].forEach((copy) => { %>
+            <div class="marquee-group" <% if (copy === 1) { %>aria-hidden="true"<% } %>>
+              <% row.list.forEach((skill) => { %>
+                <div class="chip">
+                  <span class="ico"><img src="<%= skill.image %>" alt="<%= copy === 0 ? skill.name : '' %>"></span>
+                  <span><%= skill.name %></span>
+                </div>
+              <% }) %>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+</section>

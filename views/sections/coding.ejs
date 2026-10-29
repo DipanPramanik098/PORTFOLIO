@@ -1,0 +1,22 @@
+<section id="coding" class="sec sec-alt">
+  <div class="container">
+    <%- include('../partials/sec-head', { heading: 'Coding Profiles', route: '/coding' }) %>
+
+    <% if (codingProfiles.length === 0) { %>
+      <p class="empty-msg">No coding profiles added yet.</p>
+    <% } else { %>
+      <div class="profiles-grid">
+        <% codingProfiles.forEach((p) => { %>
+          <a class="profile-card" href="<%= p.link %>" target="_blank" rel="noopener noreferrer">
+            <span class="profile-logo"><img src="<%= p.image %>" alt="" loading="lazy"></span>
+            <span class="profile-info">
+              <h3><%= p.platform %></h3>
+              <span>View profile</span>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>

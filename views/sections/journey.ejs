@@ -1,0 +1,45 @@
+<section id="journey" class="sec">
+  <div class="container">
+    <%- include('../partials/sec-head', { heading: 'Education & Experience', route: '/journey' }) %>
+
+    <div class="journey-grid">
+
+      <div>
+        <h3 class="col-title"><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+        <% if (education.length === 0) { %>
+          <p class="empty-msg">No education added yet.</p>
+        <% } else { %>
+          <ol class="timeline">
+            <% education.forEach((item, i) => { %>
+              <li class="tl-item" style="--i: <%= i %>">
+                <p class="tl-period"><%= item.startYear %> – <%= item.endYear %></p>
+                <h4><%= item.degree %></h4>
+                <p class="tl-org"><%= item.institute %></p>
+                <% if (item.description) { %><p class="tl-desc"><%= item.description %></p><% } %>
+              </li>
+            <% }) %>
+          </ol>
+        <% } %>
+      </div>
+
+      <div>
+        <h3 class="col-title exp"><i class="fa-solid fa-briefcase"></i> Experience</h3>
+        <% if (experience.length === 0) { %>
+          <p class="empty-msg">No experience added yet.</p>
+        <% } else { %>
+          <ol class="timeline exp">
+            <% experience.forEach((item, i) => { %>
+              <li class="tl-item" style="--i: <%= i %>">
+                <p class="tl-period"><%= item.startDate %> – <%= item.endDate %></p>
+                <h4><%= item.role %></h4>
+                <p class="tl-org"><%= item.company %></p>
+                <% if (item.description) { %><p class="tl-desc"><%= item.description %></p><% } %>
+              </li>
+            <% }) %>
+          </ol>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</section>

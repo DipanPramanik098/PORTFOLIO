@@ -1,0 +1,47 @@
+<%- include('partials/top', { pageTitle: 'Admins' }) %>
+
+<main class="container admin-main">
+  <h1 class="admin-title">Admins</h1>
+  <p class="admin-sub">Anyone listed here can log in and edit the site.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Email</th><th>Added</th></tr>
+      </thead>
+      <tbody>
+        <% admins.forEach((a) => { %>
+          <tr>
+            <td>
+              <%= a.email %>
+              <% if (String(a._id) === String(admin._id)) { %><span class="badge">you</span><% } %>
+            </td>
+            <td><%= a.createdAt.toISOString().slice(0, 10) %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <form class="form-card admin-form" method="POST" action="/admin/admins">
+    <h2>Add an admin</h2>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <div class="field">
+      <label for="newEmail">Email</label>
+      <input id="newEmail" name="email" type="email" autocomplete="off" required>
+    </div>
+    <div class="field">
+      <label for="newPassword">Password (8 to 72 characters)</label>
+      <input id="newPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required>
+    </div>
+    <div class="field">
+      <label for="confirm">Confirm password</label>
+      <input id="confirm" name="confirm" type="password" autocomplete="new-password" minlength="8" maxlength="72" required>
+    </div>
+
+    <button type="submit" class="btn">Add admin</button>
+  </form>
+</main>
+
+<%- include('partials/bottom') %>

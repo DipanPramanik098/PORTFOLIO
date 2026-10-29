@@ -1,0 +1,20 @@
+<%- include('partials/top', { pageTitle: 'Dashboard' }) %>
+
+<main class="container admin-main">
+  <h1 class="admin-title">Dashboard</h1>
+  <p class="admin-sub">Logged in as <%= admin.email %></p>
+
+  <div class="stat-grid">
+    <a class="stat" href="/admin/projects"><strong><%= counts.projects %></strong><span>projects</span></a>
+    <a class="stat" href="/admin/skills"><strong><%= counts.skills %></strong><span>skills</span></a>
+    <a class="stat" href="/admin/coding"><strong><%= counts.codingProfiles %></strong><span>coding profiles</span></a>
+    <a class="stat" href="/admin/education"><strong><%= counts.education %></strong><span>education</span></a>
+    <a class="stat" href="/admin/experience"><strong><%= counts.experience %></strong><span>experience</span></a>
+  </div>
+
+  <p class="admin-sub" style="margin-top: 32px">
+    Start with <a class="text-link" href="/admin/settings">Site settings</a> to fill in your name, photo, resume and social links.
+  </p>
+</main>
+
+<%- include('partials/bottom') %>

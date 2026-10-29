@@ -1,0 +1,67 @@
+<section id="contact" class="sec">
+  <div class="container">
+    <%- include('../partials/sec-head', { heading: 'Contact', route: '/contact' }) %>
+
+    <div class="contact-grid">
+
+      <!-- বাঁ পাশ: তথ্য ও সোশ্যাল লিংক -->
+      <div class="contact-side">
+        <p class="contact-lead">Have a project or an opportunity in mind? Send a message, or reach me on any of these.</p>
+
+        <ul class="info-list">
+          <% if (settings.email) { %>
+            <li><i class="fa-solid fa-envelope"></i><a href="mailto:<%= settings.email %>"><%= settings.email %></a></li>
+          <% } %>
+          <% if (settings.phone) { %>
+            <li><i class="fa-solid fa-phone"></i><a href="tel:<%= settings.phone %>"><%= settings.phone %></a></li>
+          <% } %>
+          <% if (settings.location) { %>
+            <li><i class="fa-solid fa-location-dot"></i><span><%= settings.location %></span></li>
+          <% } %>
+        </ul>
+
+        <% const socialMeta = [
+          { key: 'github',    label: 'GitHub',    icon: 'fa-brands fa-github' },
+          { key: 'linkedin',  label: 'LinkedIn',  icon: 'fa-brands fa-linkedin-in' },
+          { key: 'twitter',   label: 'X (Twitter)', icon: 'fa-brands fa-x-twitter' },
+          { key: 'instagram', label: 'Instagram', icon: 'fa-brands fa-instagram' }
+        ]; %>
+
+        <div class="social-rows">
+          <% socialMeta.forEach((s) => { if (settings.socials[s.key]) { %>
+            <a class="social-row" href="<%= settings.socials[s.key] %>" target="_blank" rel="noopener noreferrer">
+              <i class="<%= s.icon %>"></i>
+              <span><%= s.label %></span>
+              <i class="fa-solid fa-arrow-up-right-from-square go"></i>
+            </a>
+          <% } }) %>
+        </div>
+      </div>
+
+      <!-- ডান পাশ: ফর্ম -->
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cName">Name</label>
+          <input id="cName" name="name" type="text" autocomplete="name" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="cEmail">Email</label>
+          <input id="cEmail" name="email" type="email" autocomplete="email" required maxlength="120">
+        </div>
+        <div class="field">
+          <label for="cMessage">Message</label>
+          <textarea id="cMessage" name="message" required maxlength="2000"></textarea>
+        </div>
+
+        <!-- Honeypot: মানুষ এটা দেখে না, কিন্তু স্প্যাম বট ভরে ফেলে -->
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Send message</button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+
+    </div>
+  </div>
+</section>

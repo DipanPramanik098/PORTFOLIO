@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../partials/head', { title: pageTitle + ' | Admin' }) %>
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="admin-body">
+
+<% if (typeof admin !== 'undefined' && admin) { %>
+  <header class="admin-bar">
+    <div class="container admin-bar-inner">
+      <a href="/admin" class="admin-brand">Admin<small>portfolio</small></a>
+
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle dark and light mode">🌓</button>
+
+      <form method="POST" action="/admin/logout" class="inline">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="btn btn-sm">Log out</button>
+      </form>
+
+      <nav class="admin-links">
+        <% [
+          ['/admin', 'dashboard'],
+          ['/admin/settings', 'settings'],
+          ['/admin/projects', 'projects'],
+          ['/admin/skills', 'skills'],
+          ['/admin/coding', 'coding'],
+          ['/admin/education', 'education'],
+          ['/admin/experience', 'experience'],
+          ['/admin/admins', 'admins']
+        ].forEach(([href, label]) => {
+          const on = href === '/admin' ? currentPath === '/admin' : currentPath.startsWith(href); %>
+          <a href="<%= href %>" class="<%= on ? 'active' : '' %>"><%= label %></a>
+        <% }) %>
+        <a href="/" target="_blank" rel="noopener">view site</a>
+      </nav>
+    </div>
+  </header>
+<% } %>
+
+<% if (flash) { %>
+  <div class="container flash-wrap">
+    <p class="alert <%= flash.type %>" role="status"><%= flash.text %></p>
+  </div>
+<% } %>

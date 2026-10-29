@@ -1,0 +1,58 @@
+<%- include('partials/top', { pageTitle: cfg.plural }) %>
+
+<main class="container admin-main">
+  <div class="admin-head">
+    <div>
+      <h1 class="admin-title"><%= cfg.plural %></h1>
+      <p class="admin-sub"><%= items.length %> total. Smaller order numbers appear first on the site.</p>
+    </div>
+    <a href="/admin/<%= slug %>/new" class="btn"><i class="fa-solid fa-plus"></i> Add new</a>
+  </div>
+
+  <% if (items.length === 0) { %>
+    <p class="empty-box">Nothing here yet. Use "Add new" to create the first one.</p>
+  <% } else { %>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <% if (imgField) { %><th></th><% } %>
+            <% cfg.columns.forEach((c) => { %><th><%= c.label %></th><% }) %>
+            <th>Order</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((item) => { %>
+            <tr>
+              <% if (imgField) { %>
+                <td>
+                  <% if (item[imgField.name]) { %>
+                    <img class="thumb" src="<%= item[imgField.name] %>" alt="">
+                  <% } %>
+                </td>
+              <% } %>
+
+              <% cfg.columns.forEach((c) => { const v = item[c.key]; %>
+                <td class="clip"><%= Array.isArray(v) ? v.join(', ') : v %></td>
+              <% }) %>
+
+              <td><%= item.order %></td>
+
+              <td class="actions">
+                <a class="btn btn-sm btn-outline" href="/admin/<%= slug %>/<%= item._id %>">Edit</a>
+                <form method="POST" action="/admin/<%= slug %>/<%= item._id %>/delete" class="inline"
+                      data-confirm="Delete this item? This cannot be undone.">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</main>
+
+<%- include('partials/bottom') %>

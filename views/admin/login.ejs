@@ -1,0 +1,26 @@
+<%- include('partials/top', { pageTitle: 'Log in' }) %>
+
+<main class="auth-wrap">
+  <form class="form-card auth-card" method="POST" action="/admin/login">
+    <h1 class="admin-title">Admin login</h1>
+
+    <% if (error) { %>
+      <p class="alert err" role="alert"><%= error %></p>
+    <% } %>
+
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" value="<%= email %>" autocomplete="username" required autofocus>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+    </div>
+
+    <button type="submit" class="btn">Log in</button>
+  </form>
+</main>
+
+<%- include('partials/bottom') %>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: settings.fullName + ' | Portfolio', description: settings.about }) %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main>
+    <%- include('../sections/hero') %>
+    <%- include('../sections/skills') %>
+    <%- include('../sections/projects') %>
+    <%- include('../sections/journey') %>
+    <%- include('../sections/coding') %>
+    <%- include('../sections/contact') %>
+  </main>
+
+  <%- include('../partials/footer') %>
+  <%- include('../partials/scripts') %>
+</body>
+</html>

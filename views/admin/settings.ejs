@@ -1,0 +1,85 @@
+<%- include('partials/top', { pageTitle: 'Site settings' }) %>
+
+<main class="container admin-main">
+  <h1 class="admin-title">Site settings</h1>
+  <p class="admin-sub">These appear in the hero section, resume button and contact section of your site.</p>
+
+  <form class="form-card admin-form wide" method="POST" action="/admin/settings" enctype="multipart/form-data">
+    <% if (error) { %>
+      <p class="alert err" role="alert"><%= error %></p>
+    <% } %>
+
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="fullName">Full name *</label>
+        <input id="fullName" name="fullName" type="text" maxlength="80" value="<%= s.fullName || '' %>" required>
+      </div>
+      <div class="field">
+        <label for="tagline">Role / tagline</label>
+        <input id="tagline" name="tagline" type="text" maxlength="120" value="<%= s.tagline || '' %>">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="about">Short about</label>
+      <textarea id="about" name="about" maxlength="600"><%= s.about || '' %></textarea>
+    </div>
+
+    <div class="field">
+      <label for="heroImage">Your photo</label>
+      <% if (s.heroImage) { %><img class="preview" src="<%= s.heroImage %>" alt="Current photo"><% } %>
+      <input id="heroImage" name="heroImage" type="text" value="<%= s.heroImage || '' %>" placeholder="Image link, or upload a file below">
+      <input name="imageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" aria-label="Upload a photo">
+      <small class="help">Max 2 MB. An uploaded file replaces the link above.</small>
+    </div>
+
+    <div class="field">
+      <label for="resumeLink">Resume link</label>
+      <input id="resumeLink" name="resumeLink" type="text" maxlength="500" value="<%= s.resumeLink || '' %>">
+      <small class="help">A public link (for example Google Drive), or /resume/resume.pdf. Leave empty to hide the button.</small>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" maxlength="120" value="<%= s.email || '' %>">
+      </div>
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="text" maxlength="30" value="<%= s.phone || '' %>">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="location">Location</label>
+      <input id="location" name="location" type="text" maxlength="100" value="<%= s.location || '' %>">
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="github">GitHub</label>
+        <input id="github" name="github" type="url" maxlength="500" placeholder="https://" value="<%= s.socials.github || '' %>">
+      </div>
+      <div class="field">
+        <label for="linkedin">LinkedIn</label>
+        <input id="linkedin" name="linkedin" type="url" maxlength="500" placeholder="https://" value="<%= s.socials.linkedin || '' %>">
+      </div>
+      <div class="field">
+        <label for="twitter">X (Twitter)</label>
+        <input id="twitter" name="twitter" type="url" maxlength="500" placeholder="https://" value="<%= s.socials.twitter || '' %>">
+      </div>
+      <div class="field">
+        <label for="instagram">Instagram</label>
+        <input id="instagram" name="instagram" type="url" maxlength="500" placeholder="https://" value="<%= s.socials.instagram || '' %>">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn">Save settings</button>
+    </div>
+  </form>
+</main>
+
+<%- include('partials/bottom') %>

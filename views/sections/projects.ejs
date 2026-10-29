@@ -1,0 +1,56 @@
+<section id="projects" class="sec">
+  <div class="container">
+    <%- include('../partials/sec-head', { heading: 'Projects', route: '/projects' }) %>
+
+    <% if (projects.length === 0) { %>
+      <p class="empty-msg">No projects added yet.</p>
+    <% } else { %>
+      <div class="swiper projects-swiper">
+        <div class="swiper-wrapper">
+
+          <% projects.forEach((project) => { %>
+            <div class="swiper-slide">
+              <article class="project-card">
+                <div class="project-img">
+                  <img
+                    src="<%= project.image || 'https://placehold.co/800x500?text=Project' %>"
+                    alt="<%= project.title %>"
+                    loading="lazy">
+                </div>
+
+                <div class="project-body">
+                  <h3><%= project.title %></h3>
+                  <p class="project-desc"><%= project.description %></p>
+
+                  <ul class="tech-list">
+                    <% project.techStack.forEach((tech) => { %>
+                      <li><%= tech %></li>
+                    <% }) %>
+                  </ul>
+
+                  <div class="project-links">
+                    <% if (project.liveLink) { %>
+                      <a href="<%= project.liveLink %>" target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Live
+                      </a>
+                    <% } %>
+                    <% if (project.githubLink) { %>
+                      <a href="<%= project.githubLink %>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                        <i class="fa-brands fa-github"></i> GitHub
+                      </a>
+                    <% } %>
+                  </div>
+                </div>
+              </article>
+            </div>
+          <% }) %>
+
+        </div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    <% } %>
+  </div>
+</section>

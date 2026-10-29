@@ -1,0 +1,62 @@
+<% const payload = {
+  name: settings.fullName,
+  role: settings.tagline,
+  stack: skills.slice(0, 3).map((s) => s.name),
+  projects: projects.length
+}; %>
+
+<section id="home" class="hero">
+  <div class="container hero-grid">
+
+    <div class="hero-text">
+      <h1 class="hero-name" aria-label="<%= settings.fullName %>">
+        <% let n = 0; %>
+        <% settings.fullName.split(' ').forEach((word) => { %><span class="word" aria-hidden="true"><% word.split('').forEach((ch) => { %><span class="ch" style="--n: <%= n++ %>"><%= ch %></span><% }) %></span> <% }) %>
+      </h1>
+
+      <p class="hero-role"><span><%= settings.tagline %></span></p>
+      <p class="hero-about"><%= settings.about %></p>
+
+      <div class="hero-buttons">
+        <% if (settings.resumeLink) { %>
+          <a href="<%= settings.resumeLink %>" class="btn" download>
+            <i class="fa-solid fa-download"></i> Download Resume
+          </a>
+        <% } %>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+
+      <div class="social-links">
+        <% if (settings.socials.github) { %>
+          <a href="<%= settings.socials.github %>" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <% } %>
+        <% if (settings.socials.linkedin) { %>
+          <a href="<%= settings.socials.linkedin %>" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <% } %>
+        <% if (settings.socials.twitter) { %>
+          <a href="<%= settings.socials.twitter %>" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <% } %>
+        <% if (settings.socials.instagram) { %>
+          <a href="<%= settings.socials.instagram %>" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="photo-wrap">
+        <div class="photo">
+          <img src="<%= settings.heroImage %>" alt="<%= settings.fullName %>">
+        </div>
+      </div>
+
+      <div class="resp" id="resp" data-json="<%= JSON.stringify(payload) %>">
+        <div class="resp-bar">
+          <span><b>GET</b> /me</span>
+          <span class="status">200 OK</span>
+        </div>
+        <pre></pre>
+      </div>
+    </div>
+
+  </div>
+</section>
